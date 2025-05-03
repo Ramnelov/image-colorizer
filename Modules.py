@@ -64,7 +64,7 @@ class Down(nn.Module):
 
 
 class UpSkip(nn.Module):
-    """Represents an upsample with a residual connection"""
+    """Represents an upsample with a skip connection"""
 
     def __init__(self, in_channels, out_channels):
         """Initialize module"""
