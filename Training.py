@@ -1,15 +1,15 @@
+import matplotlib.pyplot as plt
 import torch
+from matplotlib.ticker import MaxNLocator
 from torch.optim import Optimizer
 from torch.utils.data import DataLoader
+from torchvision.datasets import CIFAR100
 from torchvision.transforms import ToTensor
 from torchvision.transforms.functional import rgb_to_grayscale
 from tqdm import tqdm
 
 nn = torch.nn
 F = nn.functional
-
-from torchvision.datasets import CIFAR100
-from torchvision.transforms import ToTensor
 
 
 class Trainer:
@@ -41,6 +41,8 @@ class Trainer:
     def train(self, num_epochs: int) -> nn.Module:
         """Train the model"""
 
+        train_loss_history = []
+        val_loss_history = []
         for epoch in range(num_epochs):
 
             self.model.train()
@@ -50,6 +52,8 @@ class Trainer:
                 ),
                 desc=f"Training Epoch {epoch+1}/{num_epochs}",
             )
+            total_loss = 0
+            total_samples = 0
             for x, _ in pbar:
 
                 x.to(self.device).to(torch.float32)
@@ -64,7 +68,12 @@ class Trainer:
                 loss.backward()
                 self.opt.step()
 
+                total_loss += loss.item()
+                total_samples += len(x)
+
                 pbar.set_postfix(loss=loss.item() / len(x))
+
+            train_loss_history.append(total_loss / total_samples)
 
             self.model.eval()
             pbar = tqdm(
@@ -90,5 +99,19 @@ class Trainer:
                     total_loss += loss.item()
                     total_samples += len(x)
                     pbar.set_postfix(avg_loss=total_loss / total_samples)
+
+            val_loss_history.append(total_loss / total_samples)
+
+        # Plot loss history
+        epochs = range(1, len(train_loss_history) + 1)
+        plt.plot(epochs, train_loss_history, label="Train Loss")
+        plt.plot(epochs, val_loss_history, label="Validation Loss")
+        plt.xlabel("Epoch")
+        plt.ylabel("Average Loss")
+        plt.title("Average Loss per Epoch")
+        plt.legend()
+        plt.grid(True)
+        plt.gca().xaxis.set_major_locator(MaxNLocator(integer=True))
+        plt.show()
 
         return self.model
