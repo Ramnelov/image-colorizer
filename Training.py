@@ -64,7 +64,7 @@ class Trainer:
                 loss.backward()
                 self.opt.step()
 
-                pbar.set_postfix(loss=loss.item())
+                pbar.set_postfix(loss=loss.item() / len(x))
 
             self.model.eval()
             pbar = tqdm(
