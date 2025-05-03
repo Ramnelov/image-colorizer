@@ -15,6 +15,12 @@ The model is constructed like a regular U-Net architecure with input dimension $
 
 ![U-Net Architecture](./u-net.png)
 
-The model is trained using the mean squared error (MSE) between the regular image as the target and a corresponding black and white image feeded into the network as the prediction. After each epoch the average validation loss is computed to evaluate the model over time.
+The model is trained using the mean squared error
+
+$$
+\text{MSE} = \frac{1}{n}\sum_{i=1}^{n}(y_i - \hat{y}_i)^2
+$$
+
+between the regular image as the target and a corresponding black and white image feeded into the network as the prediction. After each epoch the average validation loss is computed to evaluate the model over time.
 
 The final model is evaluated by plotting targets and predictions side by side and comparing similarity.
