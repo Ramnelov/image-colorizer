@@ -1,5 +1,10 @@
 # Image Colorizer
 
+## Table of Contents
+
+- [Introduction](#introduction)
+- [Method](#method)
+
 ## Introduction
 
 This is a project to test whether the **U-Net** convolutional neural network can be used to colarize black and white pictures. The network is trained using the images from the **CIFAR-100** dataset.
