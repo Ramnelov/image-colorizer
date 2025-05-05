@@ -13,7 +13,7 @@ This is a project to test whether the **U-Net** convolutional neural network can
 
 The model is constructed like a regular U-Net architecure with input dimension $32 \times 32 \times 1$ and output dimension $32 \times 32 \times 3$, i.e. the outout has more channels than the input. This basically means that the output needs to learn to extract extra information. Down bellow is an example of the network architecture with similar dimensions.
 
-![U-Net Architecture](./u-net.png)
+![U-Net Architecture](./figures//u-net.png)
 
 The model is trained using the mean squared error
 

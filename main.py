@@ -16,7 +16,7 @@ logging.basicConfig(
 
 def main() -> None:
 
-    trainer = Trainer(model=UNet(), batch_size=16, opt=RAdam, lr=1e-5)
+    trainer = Trainer(model=UNet(), batch_size=8, opt=RAdam, lr=1e-5)
     trained_model = trainer.train(num_epochs=10)
 
     evaluator = Evaluator(

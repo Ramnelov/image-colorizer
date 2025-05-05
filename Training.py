@@ -56,7 +56,7 @@ class Trainer:
             total_samples = 0
             for x, _ in pbar:
 
-                x.to(self.device).to(torch.float32)
+                x = x.to(self.device).to(torch.float32)
                 x_gray = rgb_to_grayscale(x, num_output_channels=1)
 
                 # Predict output
