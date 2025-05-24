@@ -1,4 +1,4 @@
-# Image Colorizer
+# U-Net Image Colorizer
 
 ## Table of Contents
 
